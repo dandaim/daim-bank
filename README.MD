@@ -1,5 +1,5 @@
 
-## This application is using Ninja Framework.
+## This application is using Ninja Framework. (http://www.ninjaframework.org/)
 
 #### It runs as a singleton application together with a in memory database.
 
