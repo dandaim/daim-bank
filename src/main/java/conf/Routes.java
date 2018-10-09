@@ -16,7 +16,6 @@
 
 package conf;
 
-import com.google.inject.Inject;
 import controllers.accounts.AccountController;
 import controllers.banks.BankController;
 import controllers.branches.BranchController;
@@ -24,12 +23,8 @@ import controllers.customers.CustomerController;
 import controllers.transactions.TransactionController;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
-import ninja.utils.NinjaProperties;
 
 public class Routes implements ApplicationRoutes {
-
-    @Inject
-    NinjaProperties ninjaProperties;
 
     /**
      * Using a (almost) nice DSL we can configure the router.
