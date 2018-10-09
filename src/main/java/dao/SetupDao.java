@@ -40,7 +40,7 @@ public class SetupDao {
     public void setup() {
         
         EntityManager entityManager = entityManagerProvider.get();
-        
+
         TypedQuery<Bank> query = entityManager.createQuery("SELECT b FROM Bank b", Bank.class);
         List<Bank> banks = query.getResultList();
 

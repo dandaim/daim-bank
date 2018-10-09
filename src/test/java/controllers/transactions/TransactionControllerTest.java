@@ -19,6 +19,7 @@ import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -95,6 +96,7 @@ public class TransactionControllerTest {
         TransactionRequest transactionRequest = buildTransactionRequest();
         Account accountFrom = mock(Account.class);
         Account accountTo = mock(Account.class);
+        Transaction transaction = mock(Transaction.class);
 
         AccountCollection accountToCollection = new AccountCollection(Collections.singletonList(accountTo));
         AccountCollection accountFromCollection = new AccountCollection(Collections.singletonList(accountFrom));
@@ -104,6 +106,7 @@ public class TransactionControllerTest {
         when(accountTo.id()).thenReturn(ACCOUNT_TO_ID);
         when(accountDao.getAccount(ACCOUNT_FROM_ID)).thenReturn(accountFromCollection);
         when(accountDao.getAccount(ACCOUNT_TO_ID)).thenReturn(accountToCollection);
+        when(transactionDao.addTransaction(any(Transaction.class))).thenReturn(transaction);
 
         Result result = transactionController.add(transactionRequest);
 
@@ -115,12 +118,12 @@ public class TransactionControllerTest {
         verify(accountTo).addBalance(transactionRequest.amount());
         verify(accountDao).update(accountTo);
 
-        Transaction transaction = captor.getValue();
+        Transaction capturedTransaction = captor.getValue();
 
-        assertThat(transaction.accountFromId(), is(ACCOUNT_FROM_ID));
-        assertThat(transaction.accountToId(), is(ACCOUNT_TO_ID));
-        assertThat(transaction.amount(), is(AMOUNT));
-        assertThat(transaction.transactionType(), is(TransactionType.DEPOSIT));
+        assertThat(capturedTransaction.accountFromId(), is(ACCOUNT_FROM_ID));
+        assertThat(capturedTransaction.accountToId(), is(ACCOUNT_TO_ID));
+        assertThat(capturedTransaction.amount(), is(AMOUNT));
+        assertThat(capturedTransaction.transactionType(), is(TransactionType.DEPOSIT));
         assertThat(result.getStatusCode(), is(201));
     }
 

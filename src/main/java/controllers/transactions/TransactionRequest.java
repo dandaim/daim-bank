@@ -21,6 +21,10 @@ public class TransactionRequest {
     @NotNull
     private Long accountToId;
 
+    public TransactionRequest() {
+
+    }
+
     @JsonCreator
     public TransactionRequest(@JsonProperty("amount") Double amount,
                               @JsonProperty("transactionType") TransactionType transactionType,

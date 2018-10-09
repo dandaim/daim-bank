@@ -1,5 +1,6 @@
 package models.transactions;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import models.accounts.Account;
 
@@ -36,6 +37,7 @@ public class Transaction {
 
     @Column(name = "transaction_date_time")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonIgnore
     private Date transactionDate;
 
     @Enumerated(EnumType.STRING)
@@ -70,7 +72,7 @@ public class Transaction {
     }
 
     @JsonProperty
-    public Long getId() {
+    public Long id() {
         return id;
     }
 

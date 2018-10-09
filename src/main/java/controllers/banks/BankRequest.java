@@ -1,5 +1,6 @@
 package controllers.banks;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import models.banks.Bank;
@@ -10,6 +11,10 @@ public class BankRequest {
 
     @Size(min = 5, max = 255)
     private String name;
+
+    public BankRequest() {
+
+    }
 
     @JsonCreator
     public BankRequest(@JsonProperty("name") String name) {
@@ -23,4 +28,5 @@ public class BankRequest {
     public Bank toBank() {
         return new Bank(name);
     }
+
 }

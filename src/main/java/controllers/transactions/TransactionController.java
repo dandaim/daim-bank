@@ -57,7 +57,7 @@ public class TransactionController {
         accountTo.addBalance(transaction.amount());
         accountDao.update(accountTo);
 
-        return Results.status(HttpStatus.CREATED_201).json().render(persistedTransaction);
+        return Results.status(HttpStatus.CREATED_201).json().render(new TransactionResponse(persistedTransaction));
     }
 
     public Result getTransactions() {

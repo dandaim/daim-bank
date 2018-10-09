@@ -11,6 +11,8 @@ import ninja.params.PathParam;
 import ninja.validation.JSR303Validation;
 import ninja.validation.Validation;
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -23,6 +25,8 @@ public class BankController {
 
     @Inject
     private BranchDao branchDao;
+
+    private final Logger logger = LoggerFactory.getLogger(BankController.class);
 
     public Result getBanks() {
 
@@ -57,6 +61,7 @@ public class BankController {
     public Result createBank(@JSR303Validation BankRequest bankRequest,
                              Validation validation) {
 
+        logger.info("bank request" + bankRequest);
 
         if (validation.hasViolations()) {
             return Results
