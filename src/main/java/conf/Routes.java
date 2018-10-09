@@ -22,7 +22,6 @@ import controllers.banks.BankController;
 import controllers.branches.BranchController;
 import controllers.customers.CustomerController;
 import controllers.transactions.TransactionController;
-import dao.SetupDao;
 import ninja.Router;
 import ninja.application.ApplicationRoutes;
 import ninja.utils.NinjaProperties;
@@ -31,9 +30,6 @@ public class Routes implements ApplicationRoutes {
 
     @Inject
     NinjaProperties ninjaProperties;
-
-    @Inject
-    private SetupDao setupDao;
 
     /**
      * Using a (almost) nice DSL we can configure the router.
@@ -45,12 +41,7 @@ public class Routes implements ApplicationRoutes {
      *            The default router of this application
      */
     @Override
-    public void init(Router router) {  
-        
-        // puts test data into db:
-        if (!ninjaProperties.isProd()) {
-            setupDao.setup();
-        }
+    public void init(Router router) {
 
         router.GET().route("/banks").with(BankController::getBanks);
         router.GET().route("/banks/{id}").with(BankController::getBank);

@@ -85,8 +85,8 @@ public class Transaction {
     }
 
     @JsonProperty
-    public Date transactionDate() {
-        return transactionDate;
+    public String transactionDate() {
+        return transactionDate.toString();
     }
 
     @JsonProperty

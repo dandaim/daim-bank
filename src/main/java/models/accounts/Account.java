@@ -73,6 +73,11 @@ public class Account {
     }
 
     @JsonProperty
+    public Long branchId() {
+        return branch.id();
+    }
+
+    @JsonProperty
     public Double currentBalance() {
         return currentBalance;
     }

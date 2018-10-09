@@ -9,7 +9,7 @@ create table Branch (
     branch_details varchar(255),
     bank_id bigint,
     primary key (id),
-    foreign key (bank_id) references Bank(id)
+    foreign key (bank_id) references Bank(id) on delete cascade
 );
 
 create table Customer (
@@ -19,7 +19,7 @@ create table Customer (
     contact_details varchar(255),
     email varchar(255),
     primary key (id),
-    foreign key (branch_id) references Branch(id)
+    foreign key (branch_id) references Branch(id) on delete cascade
 );
 
 create table Account (
@@ -31,8 +31,8 @@ create table Account (
     account_type varchar(30),
     current_balance double,
     primary key (id),
-    foreign key (account_owner_id) references Customer(id),
-    foreign key (branch_id) references Branch(id),
+    foreign key (account_owner_id) references Customer(id) on delete cascade,
+    constraint index_branch_id INDEX (branch_id),
     constraint unique_account_branch UNIQUE (branch_id, account_number)
 );
 
@@ -42,5 +42,8 @@ create table Transaction (
    account_to_id bigint NOT NULL,
    transaction_amount double,
    transaction_date_time timestamp,
-   transaction_type varchar(30)
+   transaction_type varchar(30),
+   primary key (id),
+   foreign key (account_from_id) references Account(id) on delete cascade,
+   foreign key (account_to_id) references Account(id) on delete cascade,
 );
